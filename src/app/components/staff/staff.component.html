@@ -1,0 +1,29 @@
+<div class="container pt-4">
+  <table class="table table-hover table-bordered table-sm" *ngIf="dataStaffs && dataStaffs.length > 0">
+    <thead class="thead-dark">
+          <tr>
+            <th>ID</th>
+              <th>Name</th>
+              <th>Patronus</th>
+              <th>Age</th>
+              <th>Image</th>
+          </tr>
+      </thead>
+      <tbody *ngFor="let staff of dataStaffs;let i = index" [attr.data-index]="i">
+          <tr>
+             <td>{{ i+1 }}</td>
+              <td>{{ staff.name }}</td>
+              <td>{{ staff.patronus }}</td>
+              <td *ngIf="staff.age; else noAge">{{ staff.age }}</td>
+              <td class="d-flex flex-row justify-content-center alig-items-center">
+                <img [src]="staff?.image" width="100" height="100">
+              </td>
+          </tr>
+      </tbody>
+  </table>
+  </div>
+
+  <ng-template #noAge>
+    <td>N/A</td>
+  </ng-template>
+

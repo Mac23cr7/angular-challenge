@@ -1,0 +1,53 @@
+<div class="container pt-4">
+  <div class="row" class="form-group">
+    <input
+      type="text"
+      class="form-control"
+      [(ngModel)]="filterStudent"
+      name="filterStudent"
+      placeholder="Search Student..."
+    />
+  </div>
+
+  <div class="row" class="form-group">
+    <a routerLink="/students/form" class="btn btn-primary">Add New Student</a>
+  </div>
+
+  <div class="row pt-4" class="form-group">
+    <table
+      class="table table-hover table-bordered table-sm"
+      *ngIf="dataStudents && dataStudents.length > 0"
+    >
+      <thead class="thead-dark">
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Patronus</th>
+          <th>Age</th>
+          <th>Image</th>
+        </tr>
+      </thead>
+      <tbody
+        *ngFor="
+          let student of dataStudents | filter: filterStudent;
+          let i = index
+        "
+        [attr.data-index]="i"
+      >
+        <tr>
+          <td>{{ i + 1 }}</td>
+          <td>{{ student.name }}</td>
+          <td>{{ student.patronus }}</td>
+          <td *ngIf="student.age; else noAge">{{ student.age }}</td>
+          <td class="d-flex flex-row justify-content-center alig-items-center">
+            <img [src]="student?.image" width="100" height="100" />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<ng-template #noAge>
+  <td>N/A</td>
+</ng-template>
